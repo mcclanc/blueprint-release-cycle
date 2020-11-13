@@ -1,6 +1,6 @@
 formatVersion: 1
 name: OpenCart_Template
-version: 2
+version: 3
 inputs:
   hostname:
     type: string
