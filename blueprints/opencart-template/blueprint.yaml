@@ -1,0 +1,60 @@
+formatVersion: 1
+name: Base-Ubuntu
+version: 1
+inputs:
+  hostname:
+    type: string
+    default: test-machine
+  user:
+    type: string
+    default: demouser
+  password:
+    type: string
+    encrypted: true
+    default: VMware1!
+resources:
+  Cloud_Machine_1:
+    type: Cloud.Machine
+    metadata:
+      layoutPosition:
+        - 0
+        - 0
+    properties:
+      image: Ubuntu-18
+      flavor: Medium
+      newName: '${input.hostname}'
+      cloudConfig: |
+        #cloud-config
+        hostname: shop-${input.hostname}
+
+        users:
+          - name: ${input.user}
+            sudo: ['ALL=(ALL) NOPASSWD:ALL']
+            groups: sudo
+            shell: /bin/bash
+
+        runcmd:
+          - PASS=${input.password}
+          - USER=${input.user}
+          - echo $USER:$PASS | /usr/sbin/chpasswd
+          - sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+          - service ssh reload
+          - echo "${input.user} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+          - sudo systemctl stop apt-daily.service
+          - sudo systemctl stop apt-daily-upgrade.service
+          - curl -L https://bootstrap.saltstack.com -o install_salt.sh
+          - sudo sh install_salt.sh -A 10.176.144.175
+      constraints:
+        - tag: 'env:vcf'
+      networks:
+        - network: '${resource.Cloud_Network_1.id}'
+  Cloud_Network_1:
+    type: Cloud.Network
+    metadata:
+      layoutPosition:
+        - 1
+        - 0
+    properties:
+      networkType: existing
+      constraints:
+        - tag: 'env:vcf'
