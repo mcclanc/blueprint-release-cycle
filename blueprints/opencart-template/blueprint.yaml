@@ -1,5 +1,5 @@
 formatVersion: 1
-name: Base-Ubuntu
+name: OpenCart_Template
 version: 1
 inputs:
   hostname:
