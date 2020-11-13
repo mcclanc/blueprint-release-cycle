@@ -1,6 +1,6 @@
 formatVersion: 1
 name: OpenCart_Template
-version: 1
+version: 2
 inputs:
   hostname:
     type: string
@@ -22,7 +22,6 @@ resources:
     properties:
       image: Ubuntu-18
       flavor: Medium
-      newName: '${input.hostname}'
       cloudConfig: |
         #cloud-config
         hostname: shop-${input.hostname}
