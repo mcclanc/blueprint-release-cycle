@@ -22,7 +22,7 @@ resources:
     properties:
       image: Ubuntu-18
       flavor: Medium
-      newName: '${input.hostname}'
+      cool: props
       cloudConfig: |
         #cloud-config
         hostname: shop-${input.hostname}
