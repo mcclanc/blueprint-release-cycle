@@ -12,9 +12,6 @@ inputs:
     type: string
     encrypted: true
     default: VMware1!
-  costcenter:
-    type: string
-    default: 123456
 resources:
   Cloud_Machine_1:
     type: Cloud.Machine
@@ -24,8 +21,7 @@ resources:
         - 0
     properties:
       image: Ubuntu-18
-      flavor: Medium
-      cost: ${input.costcenter}
+      flavor: Large
       cloudConfig: |
         #cloud-config
         hostname: shop-${input.hostname}
