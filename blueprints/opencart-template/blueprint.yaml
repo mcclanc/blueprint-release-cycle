@@ -24,8 +24,12 @@ resources:
         - 0
     properties:
       image: Ubuntu-18
-      flavor: Medium
+      flavor: Large
       cost: ${input.costcenter}
+      cloudConfigSettings:
+        phoneHomeFailOnTimeout: true
+        phoneHomeShouldWait: true
+        phoneHomeTimeoutSeconds: 360
       cloudConfig: |
         #cloud-config
         hostname: shop-${input.hostname}
