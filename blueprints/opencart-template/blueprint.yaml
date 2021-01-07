@@ -22,7 +22,6 @@ resources:
     properties:
       image: Ubuntu-18
       flavor: Large
-      cost: ${input.costcenter}
       cloudConfigSettings:
         phoneHomeFailOnTimeout: true
         phoneHomeShouldWait: true
