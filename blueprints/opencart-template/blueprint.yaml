@@ -22,7 +22,6 @@ resources:
     properties:
       image: Ubuntu-18
       flavor: Large
-      test: run
       cloudConfigSettings:
         phoneHomeFailOnTimeout: true
         phoneHomeShouldWait: true
